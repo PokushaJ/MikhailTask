@@ -1,4 +1,10 @@
 spring:
   application:
     name: interview-task
+---
+spring:
+  datasource:
+    username: postgres
+    password: NodnN566!!
+    url: jdbc:postgresql://localhost:5432/service
 
