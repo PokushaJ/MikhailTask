@@ -1,13 +1,15 @@
 package ru.sberbank.interview.task.controller.dto.support;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class Entity {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class EntityDto {
     @JsonProperty(value = "entityId")
     private Long id; // В json это поле должно называться entityId
     private Integer code;
