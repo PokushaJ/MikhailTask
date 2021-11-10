@@ -1,10 +1,12 @@
 spring:
   application:
     name: interview-task
+server:
+  port: 8082
 ---
 spring:
   datasource:
-    username: postgres
-    password: NodnN566!!
+    username: interviewer
+    password: three_tasks
     url: jdbc:postgresql://localhost:5432/service
 
