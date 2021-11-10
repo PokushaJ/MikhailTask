@@ -12,7 +12,7 @@ import ru.sberbank.interview.task.service.Service;
 import java.util.List;
 
 @RestController
-@RequestMapping("${spring.application.name}/mikhail-task")
+@RequestMapping("${spring.application.name}")
 @RequiredArgsConstructor
 @Slf4j
 public class ServiceController {
@@ -34,14 +34,14 @@ public class ServiceController {
         return ResponseEntity.ok().body(service.getEntitiesByIds(ids));
     }
 
-    @GetMapping(value = "/code-and-name", produces = JSON)
-    public List<EntityDto> getEntitiesByCodeAndSysname(@RequestParam(value = "code", required = false) Integer code,
-                                                       @RequestParam(value = "sysname", required = false) String sysName) {
-        return service.getEntitiesByCodeAndSysname(code, sysName);
+    @GetMapping(value = "/codeOrName", produces = JSON)
+    public ResponseEntity<List<EntityDto>> getEntitiesByCodeAndSysname(@RequestParam(value = "code", required = false) Integer code,
+                                                                       @RequestParam(value = "sysname", required = false) String sysName) {
+        return ResponseEntity.ok().body(service.getEntitiesByCodeAndSysname(code, sysName));
     }
 
     @GetMapping(value = "/getList/{sysname}", produces = JSON)
-    public GetListRes getList(@PathVariable(value = "sysname") String sysName) {
-        return service.getList(sysName);
+    public ResponseEntity<GetListRes> getList(@PathVariable(value = "sysname") String sysName) {
+        return ResponseEntity.ok().body(service.getList(sysName));
     }
 }

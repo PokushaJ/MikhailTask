@@ -3,6 +3,7 @@ package ru.sberbank.interview.task.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import ru.sberbank.interview.task.controller.dto.res.GetListRes;
 import ru.sberbank.interview.task.controller.dto.support.EntityDto;
@@ -28,9 +29,9 @@ public class ServiceImpl implements Service {
         List<EntityDto> entities = entityRepository.findAllByIdIn(ids).stream().map(EntityDao::convertToDto).collect(Collectors.toList());
         List<Long> checkList = entities.stream().map(EntityDto::getId).collect(Collectors.toList());
         if (!checkList.containsAll(ids)) {
-            log.info(CollectionUtils.subtract(ids, entities.stream().map(EntityDto::getId).collect(Collectors.toList())).toString());
-            throw new MyException(404, "Не все id есть в БД: ", "3");
-            //throw new NullPointerException();
+            throw new MyException(404, HttpStatus.BAD_REQUEST, "Не все id есть в БД: " + CollectionUtils.subtract(ids, entities.stream()
+                    .map(EntityDto::getId)
+                    .collect(Collectors.toList())));
         }
         return entities;
     }

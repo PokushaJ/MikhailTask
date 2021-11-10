@@ -6,6 +6,7 @@ import ru.sberbank.interview.task.controller.dto.support.EntityDto;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Test_task")
@@ -38,5 +39,16 @@ public class EntityDao implements Serializable {
         return dto;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EntityDao entityDao = (EntityDao) o;
+        return code.equals(entityDao.code) && sysName.equals(entityDao.sysName);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(code, sysName);
+    }
 }
