@@ -45,7 +45,6 @@ public class ServiceImpl implements Service {
             result = entityRepository.findAllBySysName(sysName);
         } else {
             result = StreamSupport.stream(entityRepository.findAll().spliterator(), false).distinct().collect(Collectors.toList());
-            //Что является дублем? Айдишник получается не автоинкремент?
         }
         return result.stream().map(EntityDao::convertToDto).collect(Collectors.toList());
     }
